@@ -1,0 +1,7 @@
+C:\Users\Legionite\Desktop\TT_ColliderControl\TT_ColliderController\TT_ColliderController\obj\Release\TT_ColliderController.csprojAssemblyReference.cache
+C:\Users\Legionite\Desktop\TT_ColliderControl\TT_ColliderController\TT_ColliderController\obj\Release\TT_ColliderController.csproj.CoreCompileInputs.cache
+C:\Users\Legionite\Desktop\TT_ColliderControl\TT_ColliderController\TT_ColliderController\bin\Release\mod.json
+C:\Users\Legionite\Desktop\TT_ColliderControl\TT_ColliderController\TT_ColliderController\bin\Release\TT_ColliderController.dll
+C:\Users\Legionite\Desktop\TT_ColliderControl\TT_ColliderController\TT_ColliderController\bin\Release\TT_ColliderController.pdb
+C:\Users\Legionite\Desktop\TT_ColliderControl\TT_ColliderController\TT_ColliderController\obj\Release\TT_ColliderController.dll
+C:\Users\Legionite\Desktop\TT_ColliderControl\TT_ColliderController\TT_ColliderController\obj\Release\TT_ColliderController.pdb
