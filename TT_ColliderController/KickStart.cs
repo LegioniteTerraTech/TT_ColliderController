@@ -89,7 +89,7 @@ namespace TT_ColliderController
             {
                 Debug.Log("COLLIDER CONTROLLER: Found Control blocks!  Will switch no-collider block fetch system to Control-Block Supported!");
                 isControlBlocksPresent = true;
-            }
+            } 
 
 
             Debug.Log("\nCOLLIDER CONTROLLER: Config Loading");

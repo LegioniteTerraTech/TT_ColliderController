@@ -1,7 +1,7 @@
 ﻿{
-  "Id": "legionite.collidercontroller",
+  "Id": "legioniteterratech.collidercontroller",
   "DisplayName": "Collider Control",
-  "Author": "Legionite",
+  "Author": "LegioniteTerraTech",
   "Version": "0.1.0",
   "Enable": true,
   "AssemblyName": "TT_ColliderController.dll",
