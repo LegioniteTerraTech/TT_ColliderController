@@ -2,7 +2,7 @@
   "Id": "legioniteterratech.collidercontroller",
   "DisplayName": "Collider Control",
   "Author": "LegioniteTerraTech",
-  "Version": "1.0.0.0",
+  "Version": "0.1.0",
   "Enable": true,
   "AssemblyName": "TT_ColliderController.dll",
   "EntryMethod": "TT_ColliderController.KickStart.Main"
