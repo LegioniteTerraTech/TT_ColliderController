@@ -5,7 +5,7 @@ using Rewired;
 using UnityEngine;
 
 namespace TT_ColliderController
-{
+{ 
     class ColliderCommander
     {
         //The baseline controller for all colliders on a Tech.
