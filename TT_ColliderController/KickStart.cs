@@ -66,7 +66,7 @@ namespace TT_ColliderController
         public static void Main()
         {
             //Where the fun begins
-
+            
             //Initiate the madness
             HarmonyInstance harmonyInstance = HarmonyInstance.Create("legioniteterratech.collidercontroller");
             harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
