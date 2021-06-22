@@ -1,6 +1,5 @@
 # TT_ColliderController
-(TTMM still borked on this idk why)
-Version 0.8
+Version 0.9
 
 Control colliders of Techs to greatly reduce lag when they are idle in the world.  
 Mostly intended for huge artbuilds.  Will re-enable colliders in combat or collision cases.
