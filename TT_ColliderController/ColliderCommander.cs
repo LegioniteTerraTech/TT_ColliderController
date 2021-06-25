@@ -241,7 +241,7 @@ namespace TT_ColliderController
                         //Debug.Log("(CB) Object " + grabbedGameObjectCB + " in " + grabbedGameObject + " is slippery!");
                         if (grabbedGameObjectCB.transform.childCount >= 1)
                         {
-                            Debug.Log("(CB) Performing Recursive Action on " + grabbedGameObjectCB + "!  Confirmed Children " + grabbedGameObjectCB.transform.childCount);
+                            //Debug.Log("(CB) Performing Recursive Action on " + grabbedGameObjectCB + "!  Confirmed Children " + grabbedGameObjectCB.transform.childCount);
                             RecursiveClusterBodyHandlerDestroy(grabbedGameObjectCB);
                         }
                     }
@@ -286,7 +286,7 @@ namespace TT_ColliderController
                         //Debug.Log("(CB) Object " + grabbedGameObjectCB + " in " + grabbedGameObject + " is slippery!");
                         if (grabbedGameObjectCB.transform.childCount >= 1)
                         {
-                            Debug.Log("(CB) Performing Recursive Action on " + grabbedGameObjectCB + "!  Confirmed Children " + grabbedGameObjectCB.transform.childCount);
+                            //Debug.Log("(CB) Performing Recursive Action on " + grabbedGameObjectCB + "!  Confirmed Children " + grabbedGameObjectCB.transform.childCount);
                             RecursiveClusterBodyHandlerReturn(grabbedGameObjectCB);
                         }
                     }
