@@ -260,7 +260,7 @@ namespace TT_ColliderController
                     insert.FloteForce = combinedFlote;
                     insert.FloteForceRange = FloteBiasExtremesCB;
                     insert.FloteExtreme = mostExtreme;
-                    //Debug.Log("CB has " + blockCountCB + " blocks");
+                    Debug.Log("CB has " + blockCountCB + " blocks");
                 }
             }
 
@@ -630,11 +630,8 @@ namespace TT_ColliderController
                                 }
                                 else
                                 {
-                                    if (Singleton.Manager<ManPointer>.inst.DraggingItem.IsNull())
-                                    {
-                                        Singleton.Manager<ManPointer>.inst.MouseEvent.Send(ManPointer.Event.RMB, false, false);
-                                        camQueue = 1;
-                                    }
+                                    Singleton.Manager<ManPointer>.inst.MouseEvent.Send(ManPointer.Event.RMB, false, false);
+                                    camQueue = 1;
                                 }
                                 return;
                             }
@@ -1091,7 +1088,6 @@ namespace TT_ColliderController
             public void OnPool()
             {
                 //Inititate Collider Cleansing on first pool
-                TankBlock = gameObject.GetComponent<TankBlock>();
                 string CB = gameObject.name;
                 //Debug.Log("Processing " + gameObject + " " + CB);
 
@@ -1164,26 +1160,26 @@ namespace TT_ColliderController
                 }
 
                 // NOW we move onwards to the blocks that are kept based on player intentions
-                if (CB == "BF_Block_Faired_111" || CB == "BF_Block_Smooth_111" || CB == "BF_Block_Smooth_Edge_111" || CB == "BF_Block_Smooth_Corner_111" || CB == "BF_Block_Smooth_213")
+                if (KickStart.KeepBFFaceBlocks && (CB == "BF_Block_Faired_111" || CB == "BF_Block_Smooth_111" || CB == "BF_Block_Smooth_Edge_111" || CB == "BF_Block_Smooth_Corner_111" || CB == "BF_Block_Smooth_213"))
                 { //BF Face Blocks
                     //Debug.Log("BF FACE BLOCK " + gameObject + " MARKING FOR FUTURE REFERENCE!");
                     thisBlock.BlockCanBeToggled = 1;
                     return;//End it NOW!
                 }
-                if (CB == "GC_Armour_Plate_221" || CB == "GC_Armour_Plate_421" || CB == "GC_Armour_Plate_121")
+                if (KickStart.KeepGCArmorPlates && (CB == "GC_Armour_Plate_221" || CB == "GC_Armour_Plate_421" || CB == "GC_Armour_Plate_121"))
                 { //GC Shock Plates
                     //Debug.Log("GC SHOCK PLATE " + gameObject + " MARKING FOR FUTURE REFERENCE!");
                     thisBlock.BlockCanBeToggled = 2;
                     return;//End it NOW!
                 }
-                if (CB == "HE_ArmouredBlock_111" || CB == "HE_ArmouredBlock_112" || CB == "HE_ArmouredBlock_113" || CB == "HE_ArmouredBlock_114")
+                if (KickStart.KeepHESlopes && (CB == "HE_ArmouredBlock_111" || CB == "HE_ArmouredBlock_112" || CB == "HE_ArmouredBlock_113" || CB == "HE_ArmouredBlock_114"))
                 { //HE Armour Slopes
                     //Debug.Log("HE ARMOR SLOPE " + gameObject + " MARKING FOR FUTURE REFERENCE!");
                     thisBlock.BlockCanBeToggled = 3;
                     return;//End it NOW!
                 }
-                if (CB == "GSO_ArmourPlate_Small_111" || CB == "GSO_ArmourPlate_Medium_211" || CB == "GSO_ArmourPlate_Large_222" || CB == "GSO_ArmourPlate_Cab_111" ||
-                    CB == "GSO_Plough_311" || CB == "GSO_Plough_CowCatcher_321" || CB == "GSO_Plough_211")
+                if (KickStart.KeepGSOArmorPlates && (CB == "GSO_ArmourPlate_Small_111" || CB == "GSO_ArmourPlate_Medium_211" || CB == "GSO_ArmourPlate_Large_222" || CB == "GSO_ArmourPlate_Cab_111" ||
+                    CB == "GSO_Plough_311" || CB == "GSO_Plough_CowCatcher_321" || CB == "GSO_Plough_211"))
                 { //GSO Armour Slopes and Ploughs
                     //Debug.Log("GSO ARMOR PLATE " + gameObject + " MARKING FOR FUTURE REFERENCE!");
                     thisBlock.BlockCanBeToggled = 4;
@@ -1280,7 +1276,7 @@ namespace TT_ColliderController
                 }
                 try
                 {
-                    //Try to cycle through EVERY GameObject on this block to enable EVERY COLLIDER
+                    //Try to cycle through EVERY GameObject on this block to disable EVERY COLLIDER
                     int child = gameObject.transform.childCount;
                     for (int v = 0; v < child; ++v)
                     {
