@@ -122,22 +122,22 @@ namespace TT_ColliderController
             //UIActive.onValueSaved.AddListener(() => {colliderGUIActive = UIActive.SavedValue; });
 
             KeepBF = new OptionToggle("Keep BF Face Blocks", ColliderProperties, KeepBFFaceBlocks);
-            KeepBF.onValueSaved.AddListener(() => { KeepBFFaceBlocks = KeepBF.SavedValue; });
+            KeepBF.onValueSaved.AddListener(() => { KeepBFFaceBlocks = KeepBF.SavedValue; thisModConfig.WriteConfigJsonFile(); });
             KeepGC = new OptionToggle("Keep GC Shock Plates", ColliderProperties, KeepGCArmorPlates);
-            KeepGC.onValueSaved.AddListener(() => { KeepGCArmorPlates = KeepGC.SavedValue; });
+            KeepGC.onValueSaved.AddListener(() => { KeepGCArmorPlates = KeepGC.SavedValue; thisModConfig.WriteConfigJsonFile(); });
             KeepHE = new OptionToggle("Keep HE Fort Slopes", ColliderProperties, KeepHESlopes);
-            KeepHE.onValueSaved.AddListener(() => { KeepHESlopes = KeepHE.SavedValue; });
+            KeepHE.onValueSaved.AddListener(() => { KeepHESlopes = KeepHE.SavedValue; thisModConfig.WriteConfigJsonFile(); });
             KeepGSO = new OptionToggle("Keep GSO Armour Plates and Ploughs", ColliderProperties, KeepGSOArmorPlates);
-            KeepGSO.onValueSaved.AddListener(() => { KeepGSOArmorPlates = KeepGSO.SavedValue; });
+            KeepGSO.onValueSaved.AddListener(() => { KeepGSOArmorPlates = KeepGSO.SavedValue; thisModConfig.WriteConfigJsonFile(); });
 
             mouseModeWithNoColliders = new OptionToggle("Allow Grab of Disabled Colliders", ColliderProperties, noColliderModeMouse);
-            mouseModeWithNoColliders.onValueSaved.AddListener(() => { noColliderModeMouse = mouseModeWithNoColliders.SavedValue; });
+            mouseModeWithNoColliders.onValueSaved.AddListener(() => { noColliderModeMouse = mouseModeWithNoColliders.SavedValue; thisModConfig.WriteConfigJsonFile(); });
             autoHandleCombat = new OptionToggle("Toggle Colliders on Combat", ColliderProperties, AutoToggleOnEnemy);
-            autoHandleCombat.onValueSaved.AddListener(() => { AutoToggleOnEnemy = autoHandleCombat.SavedValue; });
+            autoHandleCombat.onValueSaved.AddListener(() => { AutoToggleOnEnemy = autoHandleCombat.SavedValue; thisModConfig.WriteConfigJsonFile(); });
             autoHandleAlly = new OptionToggle("Toggle Colliders on Allied Collision", ColliderProperties, AutoToggleOnAlly);
-            autoHandleAlly.onValueSaved.AddListener(() => { AutoToggleOnAlly = autoHandleAlly.SavedValue; });
+            autoHandleAlly.onValueSaved.AddListener(() => { AutoToggleOnAlly = autoHandleAlly.SavedValue; thisModConfig.WriteConfigJsonFile(); });
             blockUpdate = new OptionToggle("BlockUpdate (INCREASES LAG ON HUGE)", ColliderProperties, enableBlockUpdate);
-            blockUpdate.onValueSaved.AddListener(() => { enableBlockUpdate = blockUpdate.SavedValue; });
+            blockUpdate.onValueSaved.AddListener(() => { enableBlockUpdate = blockUpdate.SavedValue; thisModConfig.WriteConfigJsonFile(); });
 
             activeColliderGrab = new OptionRange("Non-Collider Grabber (More means more lag)", ColliderProperties, ActiveColliders, 20f, 100f, 10f);
             activeColliderGrab.onValueSaved.AddListener(() => { ActiveColliders = (int)activeColliderGrab.SavedValue; });
