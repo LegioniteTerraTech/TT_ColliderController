@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using Harmony;
+using HarmonyLib;
 using ModHelper.Config;
 using UnityEngine;
 using Nuterra.NativeOptions;
@@ -68,7 +68,7 @@ namespace TT_ColliderController
             //Where the fun begins
             
             //Initiate the madness
-            HarmonyInstance harmonyInstance = HarmonyInstance.Create("legioniteterratech.collidercontroller");
+            Harmony harmonyInstance = new Harmony("legioniteterratech.collidercontroller");
             harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
             GUIColliderController.Initiate();
             //ColliderCommander.EarlySubscribe();
