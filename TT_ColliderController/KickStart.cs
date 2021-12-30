@@ -27,12 +27,12 @@ namespace TT_ColliderController
         public static bool colliderGUIActive = false;       //Is the display up
         public static bool collidersEnabled = true;         //do we enable all colliders in the worldup
         //public static bool getAllPossibleObjects = false; //do we find all objects in the world
-        public static bool getAllColliders = false;         //do we GET all colliders in the world
+        public static bool getAllColliders = true;          //do we GET all colliders in the world
         public static bool updateToggle = false;            //Just update the darn thing; //do we obliterate all colliders in the world
         public static bool enableBlockUpdate = false;       //Update on EVERY block placement?
         public static bool noColliderModeMouse = true;      //Can the mouse take extra calculations to grab no-collider blocks?
         public static bool AutoToggleOnEnemy = true;        //Update on combat invoking?
-        public static bool AutoToggleOnAlly = true;        //Update on combat invoking?
+        public static bool AutoToggleOnAlly = true;         //Update on combat invoking?
         public static int ActiveColliders = 60;//60         //How many active colliders we want on AutoGrab (when CB is enabled)
 
         //Detection Variables
@@ -60,7 +60,7 @@ namespace TT_ColliderController
         public static OptionToggle blockUpdate;
         public static OptionToggle mouseModeWithNoColliders;
         public static OptionToggle autoHandleCombat;//EARLY!
-        public static OptionToggle autoHandleAlly;//EARLY!
+        public static OptionToggle autoHandleAlly;  //EARLY!
         public static OptionRange activeColliderGrab;
 
         public static void Main()
@@ -100,6 +100,8 @@ namespace TT_ColliderController
             hotKey = (KeyCode)keyInt;
 
             //thisModConfig.BindConfig<KickStart>(null, "colliderGUIActive");
+            thisModConfig.BindConfig<KickStart>(null, "collidersEnabled");
+            thisModConfig.BindConfig<KickStart>(null, "getAllColliders");
 
             thisModConfig.BindConfig<KickStart>(null, "KeepBFFaceBlocks");
             thisModConfig.BindConfig<KickStart>(null, "KeepGCArmorPlates");
@@ -153,122 +155,6 @@ namespace TT_ColliderController
                 }
             }
             return false;
-        }
-    }
-
-
-    internal class Patches
-    {
-        //SHOVE IN ModuleRemoveCollider in EVERYTHING!
-        [HarmonyPatch(typeof(TankBlock))]
-        [HarmonyPatch("OnPool")]//On Block Creation
-        private class PatchBlock
-        {
-            private static void Postfix(TankBlock __instance)
-            {
-                var target = __instance.gameObject.AddComponent<ColliderCommander.ModuleRemoveColliders>();
-                target.TankBlock = __instance;
-            }
-        }
-
-
-        [HarmonyPatch(typeof(Tank))]
-        [HarmonyPatch("OnPool")]
-        private class PatchTank
-        {
-            private static void Postfix(Tank __instance)
-            {
-                var target = __instance.gameObject.AddComponent<ColliderCommander.RemoveColliderTank>();
-                target.Subscribe(__instance);
-            }
-        }
-
-        [HarmonyPatch(typeof(Tank))]
-        [HarmonyPatch("NotifyDamage")]
-        private class PatchTankDamage
-        {
-            private static void Postfix(Tank __instance)
-            {
-                var target = __instance.gameObject.GetComponent<ColliderCommander.RemoveColliderTank>();
-                target.WarnCollisionDamage();
-            }
-        }
-        /*
-        [HarmonyPatch(typeof(ManPointer))]
-        [HarmonyPatch("TryGrabVisible")]
-        private class PatchManPointer
-        {
-            private static void Postfix(ManPointer __instance)
-            {
-                var wEffect = __instance.gameObject.AddComponent<ColliderCommander.RemoveColliderTank>();
-                wEffect.Subscribe(__instance);
-            }
-        }
-        */
-    }
-    public class GUIColliderController : MonoBehaviour
-    {
-        //We handle the GUI for the ColliderController system here, toggle when to run real colliders or not.
-
-        static private bool GUIIsActive = false;
-        static private Rect MainWindow = new Rect(300, 0, 200, 170);
-        static public GameObject GUIWindow;
-
-        static private void GUIHandler(int ID)
-        {
-            //Toggle if the colliders be gone
-            KickStart.collidersEnabled = GUI.Toggle(new Rect(15, 40, 100, 20), KickStart.collidersEnabled, "Colliders Default");
-            KickStart.updateToggle = GUI.Toggle(new Rect(15, 60, 100, 20), KickStart.updateToggle, "Update Colliders");
-            KickStart.getAllColliders = GUI.Toggle(new Rect(15, 80, 100, 20), KickStart.getAllColliders, "Update Count");
-            if (KickStart.getAllColliders)
-            {
-                KickStart.AllCollidersCount = FindObjectsOfType<Collider>().Length; //- KickStart.lastDisabledColliderCount;
-                KickStart.getAllColliders = false;
-            }
-            GUI.Label(new Rect(20, 105, 120, 20), "Count : " + KickStart.AllCollidersCount);
-            GUI.Label(new Rect(20, 120, 120, 20), "Below is only SP");
-            ColliderCommander.AFFECT_ALL_TECHS = GUI.Toggle(new Rect(15, 140, 100, 20), ColliderCommander.AFFECT_ALL_TECHS, "ALL TECHS");
-            GUI.DragWindow();
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KickStart.hotKey))
-            {
-                GUIIsActive = !GUIIsActive;
-                GUIWindow.SetActive(GUIIsActive);
-                if (!GUIIsActive)
-                {
-                    Debug.Log("\nCOLLIDER CONTROLLER: Writing to Config...");
-                    KickStart._thisModConfig.WriteConfigJsonFile();
-                }
-            }
-            if (KickStart.collidersEnabled)
-            {
-                ColliderCommander.areAllPossibleCollidersDisabled = false;
-            }
-            else
-            {
-                ColliderCommander.areAllPossibleCollidersDisabled = true;
-            }
-        }
-
-        public static void Initiate()
-        {
-            new GameObject("GUIColliderController").AddComponent<GUIColliderController>();
-            GUIWindow = new GameObject();
-            GUIWindow.AddComponent<GUIDisplay>();
-            GUIWindow.SetActive(false);
-        }
-        internal class GUIDisplay : MonoBehaviour
-        {
-            private void OnGUI()
-            {
-                if (GUIIsActive)
-                {
-                    MainWindow = GUI.Window(2199, MainWindow, GUIHandler, "Player Collider Control");
-                }
-            }
         }
     }
 }

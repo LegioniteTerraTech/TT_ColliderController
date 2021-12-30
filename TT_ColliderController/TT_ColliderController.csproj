@@ -98,8 +98,14 @@
     <None Include="VisualCommander.cs" />
     <None Include="ModuleCustomCollider.cs" />
     <None Include="BlockScanner.cs" />
+    <Compile Include="GUIColliderController.cs" />
+    <Compile Include="ModuleClusterBodyMarker.cs" />
+    <Compile Include="ModuleClusterBodySubTech.cs" />
+    <Compile Include="RemoveColliderTank.cs" />
     <Compile Include="ColliderCommander.cs" />
     <Compile Include="KickStart.cs" />
+    <Compile Include="ModuleRemoveColliders.cs" />
+    <Compile Include="PatchBatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
