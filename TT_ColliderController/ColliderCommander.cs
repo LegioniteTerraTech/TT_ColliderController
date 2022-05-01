@@ -25,7 +25,7 @@ namespace TT_ColliderController
         public static bool Thorough = true;    // Disable EVERY possible Tech collider?
 
         // Fixed Variables
-        public static int ColliderCooldown = 200;  //Cooldown (in fixedUpdates - which is roughly 50 a sec)
+        public static int ColliderCooldown = 200;  //Cooldown (in fixedUpdates - which is roughly every 4 sec)
 
         // Store in user preferences - WIP
         //int blockNamesCount = 0;

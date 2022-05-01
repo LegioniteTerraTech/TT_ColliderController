@@ -34,6 +34,7 @@ namespace TT_ColliderController
         private int lastColEnabledTime = ColliderCommander.ColliderCooldown;
         private bool queuedColliderCheck = false;
         internal bool isTempColliderEnabled = false;
+        private bool needRadCheck = false;
         private bool boxExists = false;
         private bool needsFurthestCheck = false;
         private List<Tank> closeTechs = new List<Tank>();
@@ -108,7 +109,7 @@ namespace TT_ColliderController
         private void OnTriggerEnter(Collider collider)
         {
             //collider = GetComponent<Tank>().dragSphere
-            if (ColliderCommander.areAllPossibleCollidersDisabled && lastColEnabledTime > ColliderCommander.ColliderCooldown - 5)
+            if (needRadCheck)
             {
                 if (KickStart.AutoToggleOnAlly)
                 {
@@ -177,6 +178,7 @@ namespace TT_ColliderController
         public void WarnCollision()
         {
             lastColEnabledTime = 0;
+            needRadCheck = false;
         }
 
         private void ReactToIncomingCollision()
@@ -394,7 +396,7 @@ namespace TT_ColliderController
                             //float farthest = Mathf.Max(tank.blockBounds.extents.x, Mathf.Max(tank.blockBounds.extents.y, tank.blockBounds.extents.z));
                             BoxCol.size = tank.blockBounds.size;
                             BoxCol.center = tank.trans.InverseTransformPoint(tank.boundsCentreWorld);
-                            tank.gameObject.layer = Globals.inst.layerSceneryCoarse;//danger
+                            //tank.gameObject.layer = Globals.inst.layerSceneryCoarse;//danger
                             lastDetectScale = tank.blockBounds.size;
                             Debug.Log("COLLIDER CONTROLLER: newCollider for " + tank.name + " set to " + BoxCol.size);
                             boxExists = true;
@@ -406,10 +408,11 @@ namespace TT_ColliderController
                     Destroy(BoxCol);
                     BoxCol = null;
                 }
+                needRadCheck = lastColEnabledTime > ColliderCommander.ColliderCooldown - 5;
             }
             if (BoxCol != null)
             {
-                if (lastColEnabledTime > ColliderCommander.ColliderCooldown - 5)
+                if (needRadCheck)
                 {
                     int techCount = closeTechs.Count;
                     for (int step = 0; step < techCount; )

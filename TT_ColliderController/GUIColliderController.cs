@@ -22,7 +22,7 @@ namespace TT_ColliderController
             KickStart.getAllColliders = GUI.Toggle(new Rect(15, 80, 100, 20), KickStart.getAllColliders, "Update Count");
             if (KickStart.getAllColliders)
             {
-                KickStart.AllCollidersCount = FindObjectsOfType<Collider>().Length; //- KickStart.lastDisabledColliderCount;
+                KickStart.AllCollidersCount = FindObjectsOfType<Collider>().ToList().FindAll(delegate (Collider cand) { return cand.gameObject.activeInHierarchy; }).Count(); //- KickStart.lastDisabledColliderCount;
                 KickStart.getAllColliders = false;
             }
             GUI.Label(new Rect(20, 105, 120, 20), "Count : " + KickStart.AllCollidersCount);
